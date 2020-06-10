@@ -1,5 +1,6 @@
 import * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';
 import {apiRequest} from "./request";
+import {CORE_API_ENDPOINT} from "../env.prod";
 
 /**
  * Методы для резервирования, подтверждения, отмены записи, снятия резерва записи, получения записей.

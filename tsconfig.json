@@ -15,5 +15,6 @@
       "moduleResolution": "node",
       "isolatedModules": true,
       "baseUrl": "lib",
+      "outDir": "dist"
     }
   }

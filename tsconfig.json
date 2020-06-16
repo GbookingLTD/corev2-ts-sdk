@@ -7,14 +7,15 @@
       "module": "esnext",
       "lib": ["dom", "dom.iterable", "esnext"],
       "allowJs": true,
+      "outDir": "dist",
+      "declaration": true,
+      "declarationDir": "dist",
       "skipLibCheck": true,
       "esModuleInterop": true,
       "allowSyntheticDefaultImports": true,
-      "strict": true,
       "forceConsistentCasingInFileNames": true,
       "moduleResolution": "node",
       "isolatedModules": true,
-      "baseUrl": "lib",
-      "outDir": "dist"
+      "baseUrl": "lib"
     }
   }

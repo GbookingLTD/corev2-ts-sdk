@@ -1,5 +1,5 @@
 import * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';
-import {Taxonomies} from 'widget-utils/dist';
+import { Taxonomies } from 'widget-utils/dist';
 import {
     CRAC_SLOTS_API_ENDPOINT,
     CRAC_API_ENDPOINT,

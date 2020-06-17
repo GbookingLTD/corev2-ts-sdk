@@ -742,7 +742,7 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
 
 "corev2-schemata@http://git.dev.gbooking.ru/gbooking/corev2-schemata.git":
   version "2.0.2"
-  resolved "http://git.dev.gbooking.ru/gbooking/corev2-schemata.git#206a480e0caa895edb410001ca4351b2b32ff775"
+  resolved "http://git.dev.gbooking.ru/gbooking/corev2-schemata.git#6c0f8fcbf95e6d45776612318f245fb24257cc36"
   dependencies:
     "@adobe/jsonschema2md" "^3.3.1"
     ajv "^6.5.3"

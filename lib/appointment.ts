@@ -97,7 +97,7 @@ export class MedMeAPIAppointment {
      * Получение записей клиента.
      * @param params
      */
-    getAppointmentByClient(params: GBookingCoreV2.AppointmentGetAppointmentByFilterRequestParams, cred: GBookingCoreV2.Cred):
+    getAppointmentByClient(params: GBookingCoreV2.AppointmentGetAppointmentsByClientV2RequestParams, cred: GBookingCoreV2.Cred):
         Promise<GBookingCoreV2.Appointment[]> {
         return apiRequest(CORE_API_ENDPOINT, "appointment.get_appointments_by_client_v2", params, cred)
             .then((res) => res.result);

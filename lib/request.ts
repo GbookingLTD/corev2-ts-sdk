@@ -9,12 +9,13 @@ let jsonRpcCounter: number = 1;
 
 const debug: boolean = API_REQUEST_DEBUG;
 
-export function apiRequest(endpoint: string, method: string, params: GBookingCoreV2.ParamsUnion): any {
+export function apiRequest(endpoint: string, method: string, params: GBookingCoreV2.ParamsUnion, cred?:GBookingCoreV2.Cred): any {
     let req: GBookingCoreV2.RequestClass = {
         jsonrpc: "2.0",
         id: jsonRpcCounter++,
         method: method,
-        params: params
+        params: params,
+        cred: cred
     };
 
     const jsonRequest = JSON.stringify(req as GBookingCoreV2.BusinessGetProfileByIdRequest);

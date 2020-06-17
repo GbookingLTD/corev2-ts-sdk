@@ -23,9 +23,9 @@ export class MedMeAPIClient {
      *
      * @param params
      */
-    findOrCreateClient(params: GBookingCoreV2.ClientFindOrCreateClientRequestParams):
+    findOrCreateClient(params: GBookingCoreV2.ClientFindOrCreateClientRequestParams, cred: GBookingCoreV2.Cred):
         Promise<GBookingCoreV2.ClientFindOfCreateClientResponseResult> {
-        return apiRequest(CORE_API_ENDPOINT, "client.find_or_create_result", params)
+        return apiRequest(CORE_API_ENDPOINT, "client.find_or_create_result", params, cred)
             .then((res) => res.result);
     }
 

@@ -2,13 +2,23 @@
   "name": "corev2-ts-sdk",
   "version": "1.0.0",
   "description": "",
-  "main": "lib/api.ts",
+  "main": "dist/lib/api.js",
+  "types": "dist/lib/api.d.ts",
+  "prepublish": "tsc",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-fetch": "^2.6.0"
+    "corev2-schemata": "http://git.dev.gbooking.ru/gbooking/corev2-schemata.git",
+    "moment-range": "^4.0.2",
+    "moment-timezone": "^0.5.31",
+    "node-fetch": "^2.6.0",
+    "widget-utils": "http://git.dev.gbooking.ru/gbooking/widget-utils/repository/archive.tar.gz?ref=0.8.68"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.13",
+    "typescript": "^3.9.5"
   }
 }

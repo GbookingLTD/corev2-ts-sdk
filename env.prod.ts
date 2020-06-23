@@ -4,6 +4,7 @@ export const CRAC_API_ENDPOINT: string = "http://crac-prod.gbooking.ru/rpc";
 export const CRAC3_API_ENDPOINT: string = "http://crac-prod3.gbooking.ru/rpc";
 export const OAUTH_OTP_SEND: string = "https://oauthv2.gbooking.ru/sms/code";
 export const OAUTH_OTP_VERIFY: string = "https://oauthv2.gbooking.ru/sms/verify";
+export const OAUTH_OTP_WEBLOGIN: string = "https://oauthv2.gbooking.ru/web_login";
 
 export const API_REQUEST_DEBUG: boolean = true;
 export const OTP_REQUEST_DEBUG: boolean = true;

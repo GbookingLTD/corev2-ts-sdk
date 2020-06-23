@@ -110,18 +110,19 @@ export class MedMeAPIOTPAuthorize {
      * @param password 
      */
     public webLogin(phone: string, password: string): Promise<OTPAuthenticateVerifyResponse> {
-        const qs = {
+        const jsonRequest = {
             phone,
             password,
         }
 
-        const otpSendUrl = new URL(OAUTH_OTP_WEBLOGIN);
-        Object.keys(qs).forEach((param) =>
-            otpSendUrl.searchParams.append(param, qs[param]));
-
-        debug && console.debug('<-- otp send', otpSendUrl);
-
-        return fetch(otpSendUrl)
+        debug && console.debug('<-- webLogin', OAUTH_OTP_WEBLOGIN, jsonRequest);
+        return fetch(OAUTH_OTP_WEBLOGIN, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonRequest)
+        })
             .then(res => res.text())
             .then(json => {
                 debug && console.debug('--> otp send', json)

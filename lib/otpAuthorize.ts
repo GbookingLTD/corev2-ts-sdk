@@ -1,8 +1,8 @@
-import * as url from 'url';
 import * as fetch from 'node-fetch';
 import {
     OAUTH_OTP_SEND,
     OAUTH_OTP_VERIFY,
+    OAUTH_OTP_WEBLOGIN,
     OTP_REQUEST_DEBUG
 } from '../env.prod';
 
@@ -22,6 +22,10 @@ export interface OTPAuthenticateVerifyResponse {
     user: string;
     token: string;
     auth_user: string;
+    expires: string;
+    askNewPass: boolean; // client should set new password over change_password method
+                         // webLogin will not give access if askNewPass is true
+
 }
 
 /**
@@ -44,7 +48,7 @@ export class MedMeAPIOTPAuthorize {
             phone_number: phoneNumber
         }
 
-        const otpSendUrl = new url.URL(OAUTH_OTP_SEND);
+        const otpSendUrl = new URL(OAUTH_OTP_SEND);
         Object.keys(qs).forEach((param) =>
             otpSendUrl.searchParams.append(param, qs[param]));
 
@@ -69,13 +73,15 @@ export class MedMeAPIOTPAuthorize {
      * @param oauthClientId
      * @param token
      * @param code
+     * @param resetPassword
      */
-    public verify(oauthClientId: string, token: string, code: string):
+    public verify(oauthClientId: string, token: string, code: string, resetPassword?:boolean):
         Promise<OTPAuthenticateVerifyResponse> {
         const jsonRequest = {
             client: oauthClientId,
             token,
-            code
+            code,
+            resetPassword: !!resetPassword
         };
         debug && console.debug('<-- otp verify', OAUTH_OTP_VERIFY, jsonRequest);
 
@@ -84,11 +90,42 @@ export class MedMeAPIOTPAuthorize {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: jsonRequest
+            body: JSON.stringify(jsonRequest)
         })
             .then(res => res.text())
             .then(json => {
                 debug && console.debug('--> otp verify', json)
+                return JSON.parse(json);
+            })
+            .then((res: any) => {
+                if (res.error)
+                    throw {isRpcError: true, error: res.error};
+                return res;
+            })
+    }
+
+    /**
+     * Receive users credentials by phone and password
+     * @param phone 
+     * @param password 
+     */
+    public webLogin(phone: string, password: string): Promise<OTPAuthenticateVerifyResponse> {
+        const jsonRequest = {
+            phone,
+            password,
+        }
+
+        debug && console.debug('<-- webLogin', OAUTH_OTP_WEBLOGIN, jsonRequest);
+        return fetch(OAUTH_OTP_WEBLOGIN, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonRequest)
+        })
+            .then(res => res.text())
+            .then(json => {
+                debug && console.debug('--> otp send', json)
                 return JSON.parse(json);
             })
             .then((res: any) => {

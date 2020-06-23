@@ -102,4 +102,14 @@ export class MedMeAPIAppointment {
         return apiRequest(CORE_API_ENDPOINT, "appointment.get_appointments_by_client_v2", params, cred)
             .then((res) => res.result);
     }
+
+    /**
+     * Получение записей пользователя.
+     * @param params
+     */
+    getAppointmentByUser(params: GBookingCoreV2.AppointmentGetAppointmentsByUserRequestParams, cred: GBookingCoreV2.Cred):
+        Promise<GBookingCoreV2.Appointment[]> {
+        return apiRequest(CORE_API_ENDPOINT, "appointment.get_appointments_by_user", params, cred)
+            .then((res) => res.result);
+    }
 }

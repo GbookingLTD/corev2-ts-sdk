@@ -43,3 +43,5 @@ export class MedMeAPI {
         return new MedMedAPIBusinessModel(business);
     }
 }
+
+export * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';

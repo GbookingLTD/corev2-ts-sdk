@@ -1,4 +1,4 @@
-import * as IMedMeAPI from 'corev2-schemata/langs/typescript/GBookingCoreV2';
+import * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';
 import {MedMeAPIBusiness} from "./business";
 import {MedMeAPICracSlots} from "./cracSlots";
 import {MedMeAPIClient} from "./client";
@@ -39,9 +39,9 @@ export class MedMeAPI {
      * Создание бизнес модели для управления данными, полученными из api.
      * @param business
      */
-    public static createBusinessModel(business: IMedMeAPI.BusinessClass): MedMedAPIBusinessModel {
+    public static createBusinessModel(business: GBookingCoreV2.BusinessClass): MedMedAPIBusinessModel {
         return new MedMedAPIBusinessModel(business);
     }
 }
 
-export * as IMedMeAPI from 'corev2-schemata/langs/typescript/GBookingCoreV2';
+export * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';

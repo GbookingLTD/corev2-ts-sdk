@@ -108,7 +108,7 @@ export class MedMeAPIAppointment {
      * @param params
      */
     getAppointmentByUser(params: GBookingCoreV2.AppointmentGetAppointmentsByUserRequestParams, cred: GBookingCoreV2.Cred):
-        Promise<GBookingCoreV2.Appointment[]> {
+        Promise<GBookingCoreV2.AppointmentGetAppointmentsByUserResponseResult> {
         return apiRequest(CORE_API_ENDPOINT, "appointment.get_appointments_by_user", params, cred)
             .then((res) => res.result);
     }

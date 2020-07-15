@@ -1,4 +1,4 @@
-# Med.me CoreV2 TypeScript SDK
+# Gbooking/Med.me CoreV2 TypeScript SDK
 
 ## Installation
 
@@ -13,7 +13,7 @@ npm i http://git.dev.gbooking.ru/gbooking/widget-utils/repository/archive.tar.gz
 
 ### for development
 
-you should download widget-utils and corev2-schemata and resolve 
+you should download widget-utils and corev2-schemata and resolve
 these dependencies using npm link.
 
 ````bash

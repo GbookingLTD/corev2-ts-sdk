@@ -1,12 +1,13 @@
 {
   "name": "corev2-ts-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/lib/api.js",
   "types": "dist/lib/api.d.ts",
   "prepublish": "yarn && yarn tsc",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "yarn && yarn tsc"
   },
   "author": "",
   "license": "ISC",

@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/lib/api.js",
   "types": "dist/lib/api.d.ts",
-  "prepublish": "tsc",
+  "prepublish": "yarn && yarn tsc",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

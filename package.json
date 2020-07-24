@@ -4,10 +4,8 @@
   "description": "",
   "main": "dist/lib/api.js",
   "types": "dist/lib/api.d.ts",
-  "prepublish": "yarn && yarn tsc",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "yarn && yarn tsc"
   },
   "author": "",
   "license": "ISC",

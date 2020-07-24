@@ -11,12 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "corev2-schemata": "https://github.com/GbookingLTD/corev2-schemata.git",
+    "@types/node": "^14.0.13",
+    "corev2-schemata": "git+https://github.com/GbookingLTD/corev2-schemata.git#develop",
     "moment-range": "^4.0.2",
     "moment-timezone": "^0.5.31",
     "node-fetch": "^2.6.0",
-    "@types/node": "^14.0.13",
-    "widget-utils": "https://github.com/GbookingLTD/widget-utils/archive/0.8.68.tar.gz"
+    "widget-utils": "git+https://github.com/GbookingLTD/widget-utils.git#0.8.68"
   },
   "devDependencies": {
     "typescript": "^3.9.5"

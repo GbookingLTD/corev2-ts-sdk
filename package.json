@@ -1,6 +1,6 @@
 {
   "name": "corev2-ts-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "dist/lib/api.js",
   "types": "dist/lib/api.d.ts",

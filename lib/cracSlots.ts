@@ -1,10 +1,7 @@
 import * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';
 import { Taxonomies } from 'widget-utils/dist';
-import {
-    CRAC_API_ENDPOINT,
-    CRAC3_API_ENDPOINT,
-} from '../env.prod';
 import {APIRequestFn, CRACServerRequestFn, MedMeAPIBasic} from "./basic";
+import {IMedMeJsonRpcEnv} from "./jsonRpcEnv";
 
 export class InvalidParams extends Error {
     constructor(path: string[]) {
@@ -36,12 +33,13 @@ export class MedMeAPICracSlots extends MedMeAPIBasic {
 
     /**
      * Возвращает url сервера CRAC по его названию, полученному из данных бизнеса.
+     * @param env: IMedMeJsonRpcEnv
      * @param cracServerName
      */
-    private static getCracEndpointUrl(cracServerName: string): string {
+    private static getCracEndpointUrl(env: IMedMeJsonRpcEnv, cracServerName: string): string {
         const cracUrlMap = {
-            'CRAC': CRAC_API_ENDPOINT,
-            'CRAC3': CRAC3_API_ENDPOINT,
+            'CRAC': env.CRAC_API_ENDPOINT,
+            'CRAC3': env.CRAC3_API_ENDPOINT,
         };
 
         return cracUrlMap[cracServerName];
@@ -96,12 +94,14 @@ export class MedMeAPICracSlots extends MedMeAPIBasic {
 
     private readonly cracSlotsAPIRequest_: APIRequestFn;
     private readonly cracServerRequest_: CRACServerRequestFn;
+    private readonly env_: IMedMeJsonRpcEnv;
 
     constructor(apiRequest: APIRequestFn, cracSlotsApiRequest: APIRequestFn,
-                cracServerRequest: CRACServerRequestFn) {
+                cracServerRequest: CRACServerRequestFn, env: IMedMeJsonRpcEnv) {
         super(apiRequest);
         this.cracSlotsAPIRequest_ = cracSlotsApiRequest;
         this.cracServerRequest_ = cracServerRequest;
+        this.env_ = env;
     }
 
     /**
@@ -180,7 +180,7 @@ export class MedMeAPICracSlots extends MedMeAPIBasic {
      */
     public getDistributedResourcesFreeByDate(serverName: string, params: GBookingCoreV2.CracCracDistributedResourcesFreeByDateRequestParam[]):
         Promise<GBookingCoreV2.CracCracDistributedResourcesFreeByDateResponse> {
-        const cracServerEndpoint = MedMeAPICracSlots.getCracEndpointUrl(serverName);
+        const cracServerEndpoint = MedMeAPICracSlots.getCracEndpointUrl(this.env_, serverName);
         return this.cracServerRequest_(cracServerEndpoint, "Crac.CRACDistributedResourcesFreeByDate", params);
     }
 
@@ -191,7 +191,7 @@ export class MedMeAPICracSlots extends MedMeAPIBasic {
      */
     public getResourcesFreeByDate(serverName: string, params: GBookingCoreV2.CracCracResourcesFreeByDateRequestParam[]):
         Promise<GBookingCoreV2.CracCracResourcesFreeByDateResponse> {
-        const cracServerEndpoint = MedMeAPICracSlots.getCracEndpointUrl(serverName);
+        const cracServerEndpoint = MedMeAPICracSlots.getCracEndpointUrl(this.env_, serverName);
         return this.cracServerRequest_(cracServerEndpoint, "Crac.CRACResourcesFreeByDate", params);
     }
 
@@ -202,7 +202,7 @@ export class MedMeAPICracSlots extends MedMeAPIBasic {
      */
     public getResourcesFreeByDateV2(serverName: string, params: GBookingCoreV2.CracCracResourcesFreeByDateV2RequestParam[]):
         Promise<GBookingCoreV2.CracCracResourcesFreeByDateV2Response> {
-        const cracServerEndpoint = MedMeAPICracSlots.getCracEndpointUrl(serverName);
+        const cracServerEndpoint = MedMeAPICracSlots.getCracEndpointUrl(this. env_, serverName);
         return this.cracServerRequest_(cracServerEndpoint, "Crac.CRACResourcesFreeByDateV2", params);
     }
 }

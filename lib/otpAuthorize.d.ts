@@ -1,3 +1,4 @@
+import { IMedMeJsonRpcEnv } from "./jsonRpcEnv";
 /**
  *
  */
@@ -18,6 +19,8 @@ export interface OTPAuthenticateVerifyResponse {
  * Методы OTP авторизации.
  */
 export declare class MedMeAPIOTPAuthorize {
+    private readonly env_;
+    constructor(env: IMedMeJsonRpcEnv);
     /**
      * Отправить OTP код на номер телефона.
      * @param businessId

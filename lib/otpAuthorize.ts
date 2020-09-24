@@ -1,12 +1,5 @@
 import * as fetch from 'node-fetch';
-import {
-    OAUTH_OTP_SEND,
-    OAUTH_OTP_VERIFY,
-    OAUTH_OTP_WEBLOGIN,
-    OTP_REQUEST_DEBUG
-} from '../env.prod';
-
-const debug: boolean = OTP_REQUEST_DEBUG;
+import {IMedMeJsonRpcEnv} from "./jsonRpcEnv";
 
 /**
  *
@@ -32,6 +25,13 @@ export interface OTPAuthenticateVerifyResponse {
  * Методы OTP авторизации.
  */
 export class MedMeAPIOTPAuthorize {
+    private readonly env_: IMedMeJsonRpcEnv;
+
+    constructor(env: IMedMeJsonRpcEnv) {
+        this.env_ = env;
+    }
+
+
     /**
      * Отправить OTP код на номер телефона.
      * @param businessId
@@ -41,6 +41,7 @@ export class MedMeAPIOTPAuthorize {
      */
     public send(businessId: string, phoneCountry: string, phoneArea: string, phoneNumber: string):
         Promise<OTPAuthenticateSendResponse> {
+        const debug: boolean = this.env_.OTP_REQUEST_DEBUG;
         const qs = {
             businessID: businessId,
             phone_country: phoneCountry,
@@ -48,7 +49,7 @@ export class MedMeAPIOTPAuthorize {
             phone_number: phoneNumber
         }
 
-        const otpSendUrl = new URL(OAUTH_OTP_SEND);
+        const otpSendUrl = new URL(this.env_.OAUTH_OTP_SEND);
         Object.keys(qs).forEach((param) =>
             otpSendUrl.searchParams.append(param, qs[param]));
 
@@ -77,15 +78,16 @@ export class MedMeAPIOTPAuthorize {
      */
     public verify(oauthClientId: string, token: string, code: string, resetPassword?:boolean):
         Promise<OTPAuthenticateVerifyResponse> {
+        const debug: boolean = this.env_.OTP_REQUEST_DEBUG;
         const jsonRequest = {
             client: oauthClientId,
             token,
             code,
             resetPassword: !!resetPassword
         };
-        debug && console.debug('<-- otp verify', OAUTH_OTP_VERIFY, jsonRequest);
+        debug && console.debug('<-- otp verify', this.env_.OAUTH_OTP_VERIFY, jsonRequest);
 
-        return fetch(OAUTH_OTP_VERIFY, {
+        return fetch(this.env_.OAUTH_OTP_VERIFY, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -110,13 +112,14 @@ export class MedMeAPIOTPAuthorize {
      * @param password 
      */
     public webLogin(phone: string, password: string): Promise<OTPAuthenticateVerifyResponse> {
+        const debug: boolean = this.env_.OTP_REQUEST_DEBUG;
         const jsonRequest = {
             phone,
             password,
         }
 
-        debug && console.debug('<-- webLogin', OAUTH_OTP_WEBLOGIN, jsonRequest);
-        return fetch(OAUTH_OTP_WEBLOGIN, {
+        debug && console.debug('<-- webLogin', this.env_.OAUTH_OTP_WEBLOGIN, jsonRequest);
+        return fetch(this.env_.OAUTH_OTP_WEBLOGIN, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

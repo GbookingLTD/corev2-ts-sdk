@@ -5,57 +5,84 @@ import {MedMeAPIClient} from "./client";
 import {MedMeAPIAppointment} from "./appointment";
 import {MedMeAPIOTPAuthorize} from "./otpAuthorize";
 import {MedMedAPIBusinessModel} from "./businessModel";
-import {jsonRpcRequest} from "./request";
-import {
-    CORE_API_ENDPOINT,
-    CRAC_SLOTS_API_ENDPOINT,
-} from '../env.prod';
+import {IMedMeJsonRpcEnv} from "./jsonRpcEnv";
+import {jsonRpcRequest} from "./jsonRpcRequest";
 
-export let MedMeAPI;
+/**
+ *
+ */
+export interface IMedMeAPI {
+    /**
+     * Набор методов для доступа к методам API с префиксом "business".
+     */
+    business: MedMeAPIBusiness;
+
+    /**
+     * Методы для получения слотов расписания.
+     */
+    slots: MedMeAPICracSlots;
+
+    /**
+     * Методы для создания и/или получения клиента, редактирования данных клиента.
+     */
+    client: MedMeAPIClient;
+
+    /**
+     * Методы для резервирования, подтверждения, отмены записи, снятия резерва записи, получения записей.
+     */
+    appointment: MedMeAPIAppointment;
+
+    /**
+     * Методы для OTP авторизации.
+     */
+    otpAuthorize: MedMeAPIOTPAuthorize;
+
+    /**
+     * Создание бизнес модели для управления данными, полученными из api.
+     * @param business
+     */
+    createBusinessModel(business: GBookingCoreV2.BusinessClass): MedMedAPIBusinessModel;
+}
+
+export let MedMeAPI: IMedMeAPI;
 
 /**
  * Initialize MedMeAPI as JsonRpc API
  */
-export function initJsonRpcMedMeAPI() {
-    MedMeAPI = new JsonRpcMedMeAPI();
+export function initJsonRpcMedMeAPI(env: IMedMeJsonRpcEnv) {
+    MedMeAPI = new JsonRpcMedMeAPI(env);
 }
 
 /**
  *
  */
-export class JsonRpcMedMeAPI {
+export class JsonRpcMedMeAPI implements IMedMeAPI {
+    private readonly env_: IMedMeJsonRpcEnv;
+
     /**
      * Набор методов для доступа к методам API с префиксом "business".
      */
-    public business: MedMeAPIBusiness =
-        new MedMeAPIBusiness(jsonRpcRequest.bind(null, CORE_API_ENDPOINT));
+    public readonly business: MedMeAPIBusiness;
 
     /**
      * Методы для получения слотов расписания.
      */
-    public slots: MedMeAPICracSlots =
-        new MedMeAPICracSlots(
-            jsonRpcRequest.bind(null, CORE_API_ENDPOINT),
-            jsonRpcRequest.bind(null, CRAC_SLOTS_API_ENDPOINT),
-            jsonRpcRequest.bind(null)
-        );
+    public readonly slots: MedMeAPICracSlots;
 
     /**
      * Методы для создания и/или получения клиента, редактирования данных клиента.
      */
-    public client: MedMeAPIClient =
-        new MedMeAPIClient(jsonRpcRequest.bind(null, CORE_API_ENDPOINT));
+    public readonly client: MedMeAPIClient;
 
     /**
      * Методы для резервирования, подтверждения, отмены записи, снятия резерва записи, получения записей.
      */
-    public appointment: MedMeAPIAppointment =
-        new MedMeAPIAppointment(jsonRpcRequest.bind(null, CORE_API_ENDPOINT));
+    public readonly appointment: MedMeAPIAppointment;
 
     /**
      * Методы для OTP авторизации.
      */
-    public otpAuthorize: MedMeAPIOTPAuthorize = new MedMeAPIOTPAuthorize();
+    public readonly otpAuthorize: MedMeAPIOTPAuthorize;
 
     /**
      * Создание бизнес модели для управления данными, полученными из api.
@@ -63,6 +90,30 @@ export class JsonRpcMedMeAPI {
      */
     public createBusinessModel(business: GBookingCoreV2.BusinessClass): MedMedAPIBusinessModel {
         return new MedMedAPIBusinessModel(business);
+    }
+
+    constructor(env: IMedMeJsonRpcEnv) {
+        this.env_ = env;
+
+        this.business =
+            new MedMeAPIBusiness(jsonRpcRequest.bind(this.env_, this.env_.CORE_API_ENDPOINT));
+
+        this.slots =
+            new MedMeAPICracSlots(
+                jsonRpcRequest.bind(this.env_, this.env_.CORE_API_ENDPOINT),
+                jsonRpcRequest.bind(this.env_, this.env_.CRAC_SLOTS_API_ENDPOINT),
+                jsonRpcRequest.bind(this.env_),
+                this.env_
+            );
+
+        this.client =
+            new MedMeAPIClient(jsonRpcRequest.bind(this.env_, this.env_.CORE_API_ENDPOINT));
+
+        this.appointment =
+            new MedMeAPIAppointment(jsonRpcRequest.bind(this.env_, this.env_.CORE_API_ENDPOINT));
+
+        this.otpAuthorize = new MedMeAPIOTPAuthorize(this.env_);
+
     }
 }
 

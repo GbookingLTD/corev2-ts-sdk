@@ -1,15 +1,17 @@
 import * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';
 import * as fetch from 'node-fetch';
-import {
-    JSONRPC_REQUEST_DEBUG
-} from '../env.prod';
-
 
 let jsonRpcCounter: number = 1;
 
-const debug: boolean = JSONRPC_REQUEST_DEBUG;
-
+/**
+ * @this IMedMeJsonRpcEnv
+ * @param endpoint
+ * @param method
+ * @param params
+ * @param cred
+ */
 export function jsonRpcRequest(endpoint: string, method: string, params: GBookingCoreV2.ParamsUnion, cred?:GBookingCoreV2.Cred): any {
+    const debug: boolean = this.JSONRPC_REQUEST_DEBUG;
     let req: GBookingCoreV2.RequestClass = {
         jsonrpc: "2.0",
         id: jsonRpcCounter++,

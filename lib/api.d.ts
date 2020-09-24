@@ -5,34 +5,39 @@ import { MedMeAPIClient } from "./client";
 import { MedMeAPIAppointment } from "./appointment";
 import { MedMeAPIOTPAuthorize } from "./otpAuthorize";
 import { MedMedAPIBusinessModel } from "./businessModel";
+export declare let MedMeAPI: any;
+/**
+ * Initialize MedMeAPI as JsonRpc API
+ */
+export declare function initJsonRpcMedMeAPI(): void;
 /**
  *
  */
-export declare class MedMeAPI {
+export declare class JsonRpcMedMeAPI {
     /**
      * Набор методов для доступа к методам API с префиксом "business".
      */
-    static readonly business: MedMeAPIBusiness;
+    business: MedMeAPIBusiness;
     /**
      * Методы для получения слотов расписания.
      */
-    static readonly slots: MedMeAPICracSlots;
+    slots: MedMeAPICracSlots;
     /**
      * Методы для создания и/или получения клиента, редактирования данных клиента.
      */
-    static readonly client: MedMeAPIClient;
+    client: MedMeAPIClient;
     /**
      * Методы для резервирования, подтверждения, отмены записи, снятия резерва записи, получения записей.
      */
-    static readonly appointment: MedMeAPIAppointment;
+    appointment: MedMeAPIAppointment;
     /**
      * Методы для OTP авторизации.
      */
-    static readonly otpAuthorize: MedMeAPIOTPAuthorize;
+    otpAuthorize: MedMeAPIOTPAuthorize;
     /**
      * Создание бизнес модели для управления данными, полученными из api.
      * @param business
      */
-    static createBusinessModel(business: GBookingCoreV2.BusinessClass): MedMedAPIBusinessModel;
+    createBusinessModel(business: GBookingCoreV2.BusinessClass): MedMedAPIBusinessModel;
 }
 export * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';

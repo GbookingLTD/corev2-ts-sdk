@@ -1,11 +1,10 @@
 import * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';
 import { Taxonomies } from 'widget-utils/dist';
 import {
-    CRAC_SLOTS_API_ENDPOINT,
     CRAC_API_ENDPOINT,
     CRAC3_API_ENDPOINT,
 } from '../env.prod';
-import {apiRequest} from "./request";
+import {APIRequestFn, CRACServerRequestFn, MedMeAPIBasic} from "./basic";
 
 export class InvalidParams extends Error {
     constructor(path: string[]) {
@@ -33,7 +32,7 @@ const _pickRecursive = function (filter, object, path: string[] = []) {
 /**
  *
  */
-export class MedMeAPICracSlots {
+export class MedMeAPICracSlots extends MedMeAPIBasic {
 
     /**
      * Возвращает url сервера CRAC по его названию, полученному из данных бизнеса.
@@ -95,6 +94,16 @@ export class MedMeAPICracSlots {
         return _pickRecursive(filter, business) as {general_info, id, widget_configuration};
     }
 
+    private readonly cracSlotsAPIRequest_: APIRequestFn;
+    private readonly cracServerRequest_: CRACServerRequestFn;
+
+    constructor(apiRequest: APIRequestFn, cracSlotsApiRequest: APIRequestFn,
+                cracServerRequest: CRACServerRequestFn) {
+        super(apiRequest);
+        this.cracSlotsAPIRequest_ = cracSlotsApiRequest;
+        this.cracServerRequest_ = cracServerRequest;
+    }
+
     /**
      *
      * @param taxonomy
@@ -129,7 +138,7 @@ export class MedMeAPICracSlots {
             filters
         };
 
-        return apiRequest(CRAC_SLOTS_API_ENDPOINT, "CracSlots.GetCRACResourcesAndRooms", params);
+        return this.cracSlotsAPIRequest_("CracSlots.GetCRACResourcesAndRooms", params);
     }
 
     /**
@@ -145,7 +154,7 @@ export class MedMeAPICracSlots {
             filters
         };
 
-        return apiRequest(CRAC_SLOTS_API_ENDPOINT, "CracSlots.GetCRACDistributedResourcesAndRooms", params);
+        return this.cracSlotsAPIRequest_("CracSlots.GetCRACDistributedResourcesAndRooms", params);
     }
 
     /**
@@ -161,7 +170,7 @@ export class MedMeAPICracSlots {
             filters
         };
 
-        return apiRequest(CRAC_SLOTS_API_ENDPOINT, "CracSlots.GetCRACInsuranceResourcesAndRooms", params);
+        return this.cracSlotsAPIRequest_("CracSlots.GetCRACInsuranceResourcesAndRooms", params);
     }
 
     /**
@@ -172,7 +181,7 @@ export class MedMeAPICracSlots {
     public getDistributedResourcesFreeByDate(serverName: string, params: GBookingCoreV2.CracCracDistributedResourcesFreeByDateRequestParam[]):
         Promise<GBookingCoreV2.CracCracDistributedResourcesFreeByDateResponse> {
         const cracServerEndpoint = MedMeAPICracSlots.getCracEndpointUrl(serverName);
-        return apiRequest(cracServerEndpoint, "Crac.CRACDistributedResourcesFreeByDate", params);
+        return this.cracServerRequest_(cracServerEndpoint, "Crac.CRACDistributedResourcesFreeByDate", params);
     }
 
     /**
@@ -183,7 +192,7 @@ export class MedMeAPICracSlots {
     public getResourcesFreeByDate(serverName: string, params: GBookingCoreV2.CracCracResourcesFreeByDateRequestParam[]):
         Promise<GBookingCoreV2.CracCracResourcesFreeByDateResponse> {
         const cracServerEndpoint = MedMeAPICracSlots.getCracEndpointUrl(serverName);
-        return apiRequest(cracServerEndpoint, "Crac.CRACResourcesFreeByDate", params);
+        return this.cracServerRequest_(cracServerEndpoint, "Crac.CRACResourcesFreeByDate", params);
     }
 
     /**
@@ -194,6 +203,6 @@ export class MedMeAPICracSlots {
     public getResourcesFreeByDateV2(serverName: string, params: GBookingCoreV2.CracCracResourcesFreeByDateV2RequestParam[]):
         Promise<GBookingCoreV2.CracCracResourcesFreeByDateV2Response> {
         const cracServerEndpoint = MedMeAPICracSlots.getCracEndpointUrl(serverName);
-        return apiRequest(cracServerEndpoint, "Crac.CRACResourcesFreeByDateV2", params);
+        return this.cracServerRequest_(cracServerEndpoint, "Crac.CRACResourcesFreeByDateV2", params);
     }
 }

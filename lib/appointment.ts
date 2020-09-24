@@ -1,17 +1,16 @@
 import * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';
-import {apiRequest} from "./request";
-import {CORE_API_ENDPOINT} from "../env.prod";
+import {MedMeAPIBasic} from "./basic";
 
 /**
  * Методы для резервирования, подтверждения, отмены записи, снятия резерва записи, получения записей.
  */
-export class MedMeAPIAppointment {
+export class MedMeAPIAppointment extends MedMeAPIBasic {
     /**
      * Резервирование времени для записи
      * @param params
      */
     reserveAppointment(params: GBookingCoreV2.AppointmentReserve): Promise<GBookingCoreV2.Appointment> {
-        return apiRequest(CORE_API_ENDPOINT, "appointment.reserve_appointment", params)
+        return this.apiRequest_("appointment.reserve_appointment", params)
             .then((res) => res.result);
     }
 
@@ -20,7 +19,7 @@ export class MedMeAPIAppointment {
      * @param params
      */
     clientConfirmAppointment(params: GBookingCoreV2.ConfirmAppointment): Promise<GBookingCoreV2.Appointment> {
-        return apiRequest(CORE_API_ENDPOINT, "appointment.client_confirm_appointment", params)
+        return this.apiRequest_("appointment.client_confirm_appointment", params)
             .then((res) => res.result);
     }
 
@@ -49,7 +48,7 @@ export class MedMeAPIAppointment {
      */
     cancelAppointmentByClient(params: GBookingCoreV2.AppointmentCancelAppointmentByClientRequestParams):
         Promise<boolean> {
-        return apiRequest(CORE_API_ENDPOINT, "appointment.cancel_appointment_by_client", params)
+        return this.apiRequest_("appointment.cancel_appointment_by_client", params)
             .then((res) => res.result);
     }
 
@@ -59,7 +58,7 @@ export class MedMeAPIAppointment {
      */
     cancelAppointmentByBusiness(params: GBookingCoreV2.CancelAppointmentByClient):
         Promise<boolean> {
-        return apiRequest(CORE_API_ENDPOINT, "appointment.cancel_appointment_by_business", params)
+        return this.apiRequest_("appointment.cancel_appointment_by_business", params)
             .then((res) => res.result);
     }
 
@@ -69,7 +68,7 @@ export class MedMeAPIAppointment {
      */
     clientRemoveEmptyAppointment(params: GBookingCoreV2.RemoveEmptyAppointment):
         Promise<boolean> {
-        return apiRequest(CORE_API_ENDPOINT, "appointment.client_remove_empty_appointment", params)
+        return this.apiRequest_("appointment.client_remove_empty_appointment", params)
             .then((res) => res.result);
     }
 
@@ -79,7 +78,7 @@ export class MedMeAPIAppointment {
      */
     getAppointmentByFilter(params: GBookingCoreV2.AppointmentGetAppointmentByFilterRequestParams):
         Promise<GBookingCoreV2.AppointmentGetAppointmentByFilterResponseResult> {
-        return apiRequest(CORE_API_ENDPOINT, "appointment.get_appointment_by_filter", params)
+        return this.apiRequest_("appointment.get_appointment_by_filter", params)
             .then((res) => res.result);
     }
 
@@ -89,7 +88,7 @@ export class MedMeAPIAppointment {
      */
     getAppointmentByShowcase(params: GBookingCoreV2.AppointmentGetAppointmentByShowcaseRequestParams):
         Promise<GBookingCoreV2.Appointment[]> {
-        return apiRequest(CORE_API_ENDPOINT, "appointment.get_appointment_by_showcase", params)
+        return this.apiRequest_("appointment.get_appointment_by_showcase", params)
             .then((res) => res.result);
     }
 
@@ -99,7 +98,7 @@ export class MedMeAPIAppointment {
      */
     getAppointmentByClient(params: GBookingCoreV2.AppointmentGetAppointmentsByClientV2RequestParams, cred: GBookingCoreV2.Cred):
         Promise<GBookingCoreV2.Appointment[]> {
-        return apiRequest(CORE_API_ENDPOINT, "appointment.get_appointments_by_client_v2", params, cred)
+        return this.apiRequest_("appointment.get_appointments_by_client_v2", params, cred)
             .then((res) => res.result);
     }
 
@@ -109,7 +108,7 @@ export class MedMeAPIAppointment {
      */
     getAppointmentByUser(params: GBookingCoreV2.AppointmentGetAppointmentsByUserRequestParams, cred: GBookingCoreV2.Cred):
         Promise<GBookingCoreV2.AppointmentGetAppointmentsByUserResponseResult> {
-        return apiRequest(CORE_API_ENDPOINT, "appointment.get_appointments_by_user", params, cred)
+        return this.apiRequest_("appointment.get_appointments_by_user", params, cred)
             .then((res) => res.result);
     }
 }

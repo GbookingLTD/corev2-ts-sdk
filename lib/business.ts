@@ -1,20 +1,17 @@
 import * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';
-import {
-    CORE_API_ENDPOINT
-} from '../env.prod';
 import {SetType} from "./types";
-import {apiRequest} from "./request";
+import {MedMeAPIBasic} from "./basic";
 
 /**
  *
  */
-export class MedMeAPIBusiness {
+export class MedMeAPIBusiness extends MedMeAPIBasic {
     /**
      * Получение данных бизнеса.
      * @param params
      */
     public getProfileById(params: GBookingCoreV2.BusinessGetProfileByIdRequestParams): Promise<GBookingCoreV2.BusinessGetProfileByIdResponse> {
-        return apiRequest(CORE_API_ENDPOINT, "business.get_profile_by_id", params);
+        return this.apiRequest_("business.get_profile_by_id", params);
     }
 
     /**
@@ -41,7 +38,7 @@ export class MedMeAPIBusiness {
      * @param params
      */
     public getNetworkData(params: GBookingCoreV2.BusinessGetNetworkDataRequestParams): Promise<GBookingCoreV2.BusinessGetNetworkDataResponse> {
-        return apiRequest(CORE_API_ENDPOINT, "business.get_network_data", params);
+        return this.apiRequest_("business.get_network_data", params);
     }
 
     /**

@@ -5,6 +5,11 @@ import {MedMeAPIClient} from "./client";
 import {MedMeAPIAppointment} from "./appointment";
 import {MedMeAPIOTPAuthorize} from "./otpAuthorize";
 import {MedMedAPIBusinessModel} from "./businessModel";
+import {jsonRpcRequest} from "./request";
+import {
+    CORE_API_ENDPOINT,
+    CRAC_SLOTS_API_ENDPOINT,
+} from '../env.prod';
 
 /**
  *
@@ -13,22 +18,30 @@ export class MedMeAPI {
     /**
      * Набор методов для доступа к методам API с префиксом "business".
      */
-    public static readonly business: MedMeAPIBusiness = new MedMeAPIBusiness();
+    public static readonly business: MedMeAPIBusiness =
+        new MedMeAPIBusiness(jsonRpcRequest.bind(null, CORE_API_ENDPOINT));
 
     /**
      * Методы для получения слотов расписания.
      */
-    public static readonly slots: MedMeAPICracSlots = new MedMeAPICracSlots();
+    public static readonly slots: MedMeAPICracSlots =
+        new MedMeAPICracSlots(
+            jsonRpcRequest.bind(null, CORE_API_ENDPOINT),
+            jsonRpcRequest.bind(null, CRAC_SLOTS_API_ENDPOINT),
+            jsonRpcRequest.bind(null)
+        );
 
     /**
      * Методы для создания и/или получения клиента, редактирования данных клиента.
      */
-    public static readonly client: MedMeAPIClient = new MedMeAPIClient();
+    public static readonly client: MedMeAPIClient =
+        new MedMeAPIClient(jsonRpcRequest.bind(null, CORE_API_ENDPOINT));
 
     /**
      * Методы для резервирования, подтверждения, отмены записи, снятия резерва записи, получения записей.
      */
-    public static readonly appointment: MedMeAPIAppointment = new MedMeAPIAppointment();
+    public static readonly appointment: MedMeAPIAppointment =
+        new MedMeAPIAppointment(jsonRpcRequest.bind(null, CORE_API_ENDPOINT));
 
     /**
      * Методы для OTP авторизации.

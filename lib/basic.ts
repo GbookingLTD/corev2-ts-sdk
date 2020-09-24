@@ -8,6 +8,7 @@ export type CRACServerRequestFn = (endpoint: string, method: string, params: GBo
 
 export class MedMeAPIBasic {
     protected apiRequest_: APIRequestFn;
+
     constructor(apiRequest: APIRequestFn) {
         this.apiRequest_ = apiRequest;
     }

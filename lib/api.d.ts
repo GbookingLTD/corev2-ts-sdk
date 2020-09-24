@@ -45,7 +45,7 @@ export declare function initJsonRpcMedMeAPI(env: IMedMeJsonRpcEnv): void;
  *
  */
 export declare class JsonRpcMedMeAPI implements IMedMeAPI {
-    private readonly env_;
+    private readonly context_;
     /**
      * Набор методов для доступа к методам API с префиксом "business".
      */
@@ -71,6 +71,15 @@ export declare class JsonRpcMedMeAPI implements IMedMeAPI {
      * @param business
      */
     createBusinessModel(business: GBookingCoreV2.BusinessClass): MedMedAPIBusinessModel;
+    /**
+     * Устанавливает cred.user, cred.token для всех последующих запросов
+     * @param cred
+     */
+    setCredentials(cred: GBookingCoreV2.Cred): void;
+    /**
+     * Удаляет из всех последующих запросов cred
+     */
+    clearCredentials(): void;
     constructor(env: IMedMeJsonRpcEnv);
 }
 export * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';

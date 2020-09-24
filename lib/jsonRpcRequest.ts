@@ -1,23 +1,44 @@
 import * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';
 import * as fetch from 'node-fetch';
+import {IMedMeJsonRpcEnv} from "./jsonRpcEnv";
 
 let jsonRpcCounter: number = 1;
 
 /**
- * @this IMedMeJsonRpcEnv
+ *
+ */
+export interface IJsonRpcRequestContext {
+    env: IMedMeJsonRpcEnv;
+    cred?: GBookingCoreV2.Cred;
+}
+
+/**
+ *
+ */
+export class JsonRpcRequestContext
+    implements IJsonRpcRequestContext {
+    public env: IMedMeJsonRpcEnv;
+    public cred?: GBookingCoreV2.Cred;
+
+    constructor(env: IMedMeJsonRpcEnv) {
+        this.env = env;
+    }
+}
+
+/**
+ * @this IJsonRpcRequestContext
  * @param endpoint
  * @param method
  * @param params
- * @param cred
  */
-export function jsonRpcRequest(endpoint: string, method: string, params: GBookingCoreV2.ParamsUnion, cred?:GBookingCoreV2.Cred): any {
-    const debug: boolean = this.JSONRPC_REQUEST_DEBUG;
+export function jsonRpcRequest(endpoint: string, method: string, params: GBookingCoreV2.ParamsUnion): any {
+    const debug: boolean = this.env.JSONRPC_REQUEST_DEBUG;
     let req: GBookingCoreV2.RequestClass = {
         jsonrpc: "2.0",
         id: jsonRpcCounter++,
         method: method,
         params: params,
-        cred: cred
+        cred: this.cred
     };
 
     const jsonRequest = JSON.stringify(req as GBookingCoreV2.BusinessGetProfileByIdRequest);

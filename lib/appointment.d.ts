@@ -50,16 +50,15 @@ export declare class MedMeAPIAppointment extends MedMeAPIBasic {
      * Получение записей клиента.
      * @param params
      */
-    getAppointmentByClient(params: GBookingCoreV2.AppointmentGetAppointmentsByClientV2RequestParams, cred: GBookingCoreV2.Cred): Promise<GBookingCoreV2.Appointment[]>;
+    getAppointmentByClient(params: GBookingCoreV2.AppointmentGetAppointmentsByClientV2RequestParams): Promise<GBookingCoreV2.Appointment[]>;
     /**
      * Получение записей пользователя.
      * @param params
      */
-    getAppointmentByUser(params: GBookingCoreV2.AppointmentGetAppointmentsByUserRequestParams, cred: GBookingCoreV2.Cred): Promise<GBookingCoreV2.AppointmentGetAppointmentsByUserResponseResult>;
+    getAppointmentByUser(params: GBookingCoreV2.AppointmentGetAppointmentsByUserRequestParams): Promise<GBookingCoreV2.AppointmentGetAppointmentsByUserResponseResult>;
     /**
      * Устанавливает свойство записи "клиент пришел"
      * @param params
-     * @param cred
      */
-    clientAppear(params: GBookingCoreV2.AppointmentClientAppearRequestParams, cred: GBookingCoreV2.Cred): Promise<boolean>;
+    clientAppear(params: GBookingCoreV2.AppointmentClientAppearRequestParams): Promise<boolean>;
 }

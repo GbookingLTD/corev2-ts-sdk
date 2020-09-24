@@ -1,0 +1,12 @@
+"use strict";
+exports.__esModule = true;
+exports.OTP_REQUEST_DEBUG = exports.JSONRPC_REQUEST_DEBUG = exports.OAUTH_OTP_WEBLOGIN = exports.OAUTH_OTP_VERIFY = exports.OAUTH_OTP_SEND = exports.CRAC3_API_ENDPOINT = exports.CRAC_API_ENDPOINT = exports.CRAC_SLOTS_API_ENDPOINT = exports.CORE_API_ENDPOINT = void 0;
+exports.CORE_API_ENDPOINT = "https://apiv2.gbooking.ru/rpc";
+exports.CRAC_SLOTS_API_ENDPOINT = "http://cracslots.gbooking.ru/rpc";
+exports.CRAC_API_ENDPOINT = "http://crac-prod.gbooking.ru/rpc";
+exports.CRAC3_API_ENDPOINT = "http://crac-prod3.gbooking.ru/rpc";
+exports.OAUTH_OTP_SEND = "https://oauthv2.gbooking.ru/sms/code";
+exports.OAUTH_OTP_VERIFY = "https://oauthv2.gbooking.ru/sms/verify";
+exports.OAUTH_OTP_WEBLOGIN = "https://oauthv2.gbooking.ru/web_login";
+exports.JSONRPC_REQUEST_DEBUG = true;
+exports.OTP_REQUEST_DEBUG = true;

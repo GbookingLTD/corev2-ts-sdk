@@ -1,0 +1,9 @@
+export declare const CORE_API_ENDPOINT: string;
+export declare const CRAC_SLOTS_API_ENDPOINT: string;
+export declare const CRAC_API_ENDPOINT: string;
+export declare const CRAC3_API_ENDPOINT: string;
+export declare const OAUTH_OTP_SEND: string;
+export declare const OAUTH_OTP_VERIFY: string;
+export declare const OAUTH_OTP_WEBLOGIN: string;
+export declare const JSONRPC_REQUEST_DEBUG: boolean;
+export declare const OTP_REQUEST_DEBUG: boolean;

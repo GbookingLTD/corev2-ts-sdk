@@ -111,4 +111,15 @@ export class MedMeAPIAppointment extends MedMeAPIBasic {
         return this.apiRequest_("appointment.get_appointments_by_user", params, cred)
             .then((res) => res.result);
     }
+
+    /**
+     * Устанавливает свойство записи "клиент пришел"
+     * @param params
+     * @param cred
+     */
+    clientAppear(params: GBookingCoreV2.AppointmentClientAppearRequestParams, cred: GBookingCoreV2.Cred):
+        Promise<boolean> {
+        return this.apiRequest_("appointment.client_appear", params, cred)
+            .then((res) => res.result);
+    }
 }

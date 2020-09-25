@@ -7,6 +7,7 @@ import {MedMeAPIOTPAuthorize} from "./otpAuthorize";
 import {MedMedAPIBusinessModel} from "./businessModel";
 import {IMedMeJsonRpcEnv} from "./jsonRpcEnv";
 import {IJsonRpcRequestContext, jsonRpcRequest, JsonRpcRequestContext} from "./jsonRpcRequest";
+import {APIRequestFn} from "./basic";
 
 /**
  *
@@ -51,6 +52,56 @@ export let MedMeAPI: IMedMeAPI;
  */
 export function initJsonRpcMedMeAPI(env: IMedMeJsonRpcEnv) {
     MedMeAPI = new JsonRpcMedMeAPI(env);
+}
+
+/**
+ *
+ */
+export class AMedMeAPI implements IMedMeAPI {
+
+    constructor(apiRequest: APIRequestFn) {
+        this.business =
+            new MedMeAPIBusiness(apiRequest);
+
+        this.client =
+            new MedMeAPIClient(apiRequest)
+
+        this.appointment =
+            new MedMeAPIAppointment(apiRequest);
+    }
+
+    /**
+     * Набор методов для доступа к методам API с префиксом "business".
+     */
+    public readonly business: MedMeAPIBusiness;
+
+    /**
+     * Методы для получения слотов расписания.
+     */
+    public readonly slots: MedMeAPICracSlots;
+
+    /**
+     * Методы для создания и/или получения клиента, редактирования данных клиента.
+     */
+    public readonly client: MedMeAPIClient;
+
+    /**
+     * Методы для резервирования, подтверждения, отмены записи, снятия резерва записи, получения записей.
+     */
+    public readonly appointment: MedMeAPIAppointment;
+
+    /**
+     * Методы для OTP авторизации.
+     */
+    public readonly otpAuthorize: MedMeAPIOTPAuthorize;
+
+    /**
+     * Создание бизнес модели для управления данными, полученными из api.
+     * @param business
+     */
+    public createBusinessModel(business: GBookingCoreV2.BusinessClass): MedMedAPIBusinessModel {
+        return new MedMedAPIBusinessModel(business);
+    }
 }
 
 /**

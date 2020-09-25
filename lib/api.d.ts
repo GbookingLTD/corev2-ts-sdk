@@ -6,6 +6,7 @@ import { MedMeAPIAppointment } from "./appointment";
 import { MedMeAPIOTPAuthorize } from "./otpAuthorize";
 import { MedMedAPIBusinessModel } from "./businessModel";
 import { IMedMeJsonRpcEnv } from "./jsonRpcEnv";
+import { APIRequestFn } from "./basic";
 /**
  *
  */
@@ -41,6 +42,37 @@ export declare let MedMeAPI: IMedMeAPI;
  * Initialize MedMeAPI as JsonRpc API
  */
 export declare function initJsonRpcMedMeAPI(env: IMedMeJsonRpcEnv): void;
+/**
+ *
+ */
+export declare class AMedMeAPI implements IMedMeAPI {
+    constructor(apiRequest: APIRequestFn);
+    /**
+     * Набор методов для доступа к методам API с префиксом "business".
+     */
+    readonly business: MedMeAPIBusiness;
+    /**
+     * Методы для получения слотов расписания.
+     */
+    readonly slots: MedMeAPICracSlots;
+    /**
+     * Методы для создания и/или получения клиента, редактирования данных клиента.
+     */
+    readonly client: MedMeAPIClient;
+    /**
+     * Методы для резервирования, подтверждения, отмены записи, снятия резерва записи, получения записей.
+     */
+    readonly appointment: MedMeAPIAppointment;
+    /**
+     * Методы для OTP авторизации.
+     */
+    readonly otpAuthorize: MedMeAPIOTPAuthorize;
+    /**
+     * Создание бизнес модели для управления данными, полученными из api.
+     * @param business
+     */
+    createBusinessModel(business: GBookingCoreV2.BusinessClass): MedMedAPIBusinessModel;
+}
 /**
  *
  */

@@ -1,4 +1,4 @@
-import * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';
+import * as GBookingCoreV2 from '../../corev2-schemata/langs/typescript/GBookingCoreV2';
 import {MedMeAPIBasic} from "./basic";
 
 /**
@@ -18,7 +18,7 @@ export class MedMeAPIAppointment extends MedMeAPIBasic {
      * Подтверждение записи клиентом
      * @param params
      */
-    clientConfirmAppointment(params: GBookingCoreV2.ConfirmAppointment): Promise<GBookingCoreV2.Appointment> {
+    clientConfirmAppointment(params: GBookingCoreV2.ConfirmAppointmentParams): Promise<GBookingCoreV2.Appointment> {
         return this.apiRequest_("appointment.client_confirm_appointment", params)
             .then((res) => res.result);
     }
@@ -37,7 +37,7 @@ export class MedMeAPIAppointment extends MedMeAPIBasic {
             client: {
                 id: clientId
             }
-        } as GBookingCoreV2.ConfirmAppointment;
+        } as GBookingCoreV2.ConfirmAppointmentParams;
 
         return this.clientConfirmAppointment(params);
     }
@@ -46,7 +46,7 @@ export class MedMeAPIAppointment extends MedMeAPIBasic {
      * Отмена записи клиентом
      * @param params
      */
-    cancelAppointmentByClient(params: GBookingCoreV2.AppointmentCancelAppointmentByClientRequestParams):
+    cancelAppointmentByClient(params: GBookingCoreV2.CancelAppointmentByClientParams):
         Promise<boolean> {
         return this.apiRequest_("appointment.cancel_appointment_by_client", params)
             .then((res) => res.result);
@@ -56,7 +56,7 @@ export class MedMeAPIAppointment extends MedMeAPIBasic {
      * Отмена записи администратором бизнеса
      * @param params
      */
-    cancelAppointmentByBusiness(params: GBookingCoreV2.CancelAppointmentByClient):
+    cancelAppointmentByBusiness(params: GBookingCoreV2.CancelAppointmentByBusinessParams):
         Promise<boolean> {
         return this.apiRequest_("appointment.cancel_appointment_by_business", params)
             .then((res) => res.result);
@@ -116,9 +116,29 @@ export class MedMeAPIAppointment extends MedMeAPIBasic {
      * Устанавливает свойство записи "клиент пришел"
      * @param params
      */
-    clientAppear(params: GBookingCoreV2.AppointmentClientAppearRequestParams):
+    clientAppear(params: GBookingCoreV2.ClientAppearParams):
         Promise<boolean> {
         return this.apiRequest_("appointment.client_appear", params)
             .then((res) => res.result);
+    }
+
+    /**
+     *
+     * @param params
+     */
+    startAppointment(params: GBookingCoreV2.StartAppointmentParams):
+        Promise<boolean> {
+        return this.apiRequest_("appointment.start_appointment", params)
+            .then((res) => res.result)
+    }
+
+    /**
+     *
+     * @param params
+     */
+    finishAppointment(params: GBookingCoreV2.FinishAppointmentParams):
+        Promise<boolean> {
+        return this.apiRequest_("appointment.finish_appointment", params)
+            .then((res) => res.result)
     }
 }

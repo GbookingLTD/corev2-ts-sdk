@@ -1,4 +1,4 @@
-import * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';
+import * as GBookingCoreV2 from '../../corev2-schemata/langs/typescript/GBookingCoreV2';
 import { MedMeAPIBasic } from "./basic";
 /**
  * Методы для резервирования, подтверждения, отмены записи, снятия резерва записи, получения записей.
@@ -13,7 +13,7 @@ export declare class MedMeAPIAppointment extends MedMeAPIBasic {
      * Подтверждение записи клиентом
      * @param params
      */
-    clientConfirmAppointment(params: GBookingCoreV2.ConfirmAppointment): Promise<GBookingCoreV2.Appointment>;
+    clientConfirmAppointment(params: GBookingCoreV2.ConfirmAppointmentParams): Promise<GBookingCoreV2.Appointment>;
     /**
      * Подтверждение записи администратором бизнеса
      * @see clientConfirmAppointment
@@ -25,12 +25,12 @@ export declare class MedMeAPIAppointment extends MedMeAPIBasic {
      * Отмена записи клиентом
      * @param params
      */
-    cancelAppointmentByClient(params: GBookingCoreV2.AppointmentCancelAppointmentByClientRequestParams): Promise<boolean>;
+    cancelAppointmentByClient(params: GBookingCoreV2.CancelAppointmentByClientParams): Promise<boolean>;
     /**
      * Отмена записи администратором бизнеса
      * @param params
      */
-    cancelAppointmentByBusiness(params: GBookingCoreV2.CancelAppointmentByClient): Promise<boolean>;
+    cancelAppointmentByBusiness(params: GBookingCoreV2.CancelAppointmentByBusinessParams): Promise<boolean>;
     /**
      * Удаление неподтвержденного резерва
      * @param params
@@ -60,5 +60,15 @@ export declare class MedMeAPIAppointment extends MedMeAPIBasic {
      * Устанавливает свойство записи "клиент пришел"
      * @param params
      */
-    clientAppear(params: GBookingCoreV2.AppointmentClientAppearRequestParams): Promise<boolean>;
+    clientAppear(params: GBookingCoreV2.ClientAppearParams): Promise<boolean>;
+    /**
+     *
+     * @param params
+     */
+    startAppointment(params: GBookingCoreV2.StartAppointmentParams): Promise<boolean>;
+    /**
+     *
+     * @param params
+     */
+    finishAppointment(params: GBookingCoreV2.FinishAppointmentParams): Promise<boolean>;
 }

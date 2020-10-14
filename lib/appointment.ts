@@ -47,7 +47,7 @@ export class MedMeAPIAppointment {
      * Отмена записи клиентом
      * @param params
      */
-    cancelAppointmentByClient(params: GBookingCoreV2.CancelAppointmentByClient):
+    cancelAppointmentByClient(params: GBookingCoreV2.CancelAppointmentByClientParams):
         Promise<boolean> {
         return apiRequest(CORE_API_ENDPOINT, "appointment.cancel_appointment_by_client", params)
             .then((res) => res.result);

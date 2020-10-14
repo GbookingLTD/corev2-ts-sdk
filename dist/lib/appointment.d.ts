@@ -24,7 +24,7 @@ export declare class MedMeAPIAppointment {
      * Отмена записи клиентом
      * @param params
      */
-    cancelAppointmentByClient(params: GBookingCoreV2.CancelAppointmentByClient): Promise<boolean>;
+    cancelAppointmentByClient(params: GBookingCoreV2.CancelAppointmentByClientParams): Promise<boolean>;
     /**
      * Отмена записи администратором бизнеса
      * @param params

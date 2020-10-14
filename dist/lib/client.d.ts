@@ -14,8 +14,13 @@ export declare class MedMeAPIClient {
      */
     findOrCreateClient(params: GBookingCoreV2.ClientFindOrCreateClientRequestParams, cred: GBookingCoreV2.Cred): Promise<GBookingCoreV2.ClientFindOfCreateClientResponseResult>;
     /**
-     *
+     * method for admin to update client
      * @param params
      */
     updateClient(params: GBookingCoreV2.ClientUpdateClientRequestParams): Promise<boolean>;
+    /**
+     * clients method to update client data
+     * @param params
+     */
+    updateClientInfo(params: GBookingCoreV2.ClientUpdateClientInfoRequestParams): Promise<boolean>;
 }

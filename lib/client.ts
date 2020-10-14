@@ -30,12 +30,23 @@ export class MedMeAPIClient {
     }
 
     /**
-     *
+     * method for admin to update client
      * @param params
      */
     updateClient(params: GBookingCoreV2.ClientUpdateClientRequestParams):
         Promise<boolean> {
         return apiRequest(CORE_API_ENDPOINT, "client.update_client", params)
+            .then((res) => res.result.success);
+    }
+
+    
+    /**
+     * clients method to update client data
+     * @param params
+     */
+    updateClientInfo(params: GBookingCoreV2.ClientUpdateClientInfoRequestParams):
+        Promise<boolean> {
+        return apiRequest(CORE_API_ENDPOINT, "client.update_client_info", params)
             .then((res) => res.result.success);
     }
 }

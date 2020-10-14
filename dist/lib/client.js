@@ -23,11 +23,19 @@ var MedMeAPIClient = /** @class */ (function () {
             .then(function (res) { return res.result; });
     };
     /**
-     *
+     * method for admin to update client
      * @param params
      */
     MedMeAPIClient.prototype.updateClient = function (params) {
         return apiRequest(CORE_API_ENDPOINT, "client.update_client", params)
+            .then(function (res) { return res.result.success; });
+    };
+    /**
+     * clients method to update client data
+     * @param params
+     */
+    MedMeAPIClient.prototype.updateClientInfo = function (params) {
+        return apiRequest(CORE_API_ENDPOINT, "client.update_client_info", params)
             .then(function (res) { return res.result.success; });
     };
     return MedMeAPIClient;

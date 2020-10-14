@@ -19,7 +19,7 @@ export class MedMeAPIAppointment {
      * Подтверждение записи клиентом
      * @param params
      */
-    clientConfirmAppointment(params: GBookingCoreV2.ConfirmAppointment): Promise<GBookingCoreV2.Appointment> {
+    clientConfirmAppointment(params: GBookingCoreV2.ConfirmAppointmentParams): Promise<GBookingCoreV2.Appointment> {
         return apiRequest(CORE_API_ENDPOINT, "appointment.client_confirm_appointment", params)
             .then((res) => res.result);
     }
@@ -38,7 +38,7 @@ export class MedMeAPIAppointment {
             client: {
                 id: clientId
             }
-        } as GBookingCoreV2.ConfirmAppointment;
+        } as GBookingCoreV2.ConfirmAppointmentParams;
 
         return this.clientConfirmAppointment(params);
     }
@@ -47,7 +47,7 @@ export class MedMeAPIAppointment {
      * Отмена записи клиентом
      * @param params
      */
-    cancelAppointmentByClient(params: GBookingCoreV2.AppointmentCancelAppointmentByClientRequestParams):
+    cancelAppointmentByClient(params: GBookingCoreV2.CancelAppointmentByClient):
         Promise<boolean> {
         return apiRequest(CORE_API_ENDPOINT, "appointment.cancel_appointment_by_client", params)
             .then((res) => res.result);

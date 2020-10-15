@@ -96,9 +96,9 @@ export class MedMeAPIAppointment extends MedMeAPIBasic {
      * Получение записей клиента.
      * @param params
      */
-    getAppointmentByClient(params: GBookingCoreV2.AppointmentGetAppointmentsByClientV2RequestParams):
+    getAppointmentByClient(params: GBookingCoreV2.AppointmentGetAppointmentsByClientV2RequestParams, cred: GBookingCoreV2.Cred):
         Promise<GBookingCoreV2.Appointment[]> {
-        return this.apiRequest_("appointment.get_appointments_by_client_v2", params)
+        return this.apiRequest_("appointment.get_appointments_by_client_v2", params, cred)
             .then((res) => res.result);
     }
 
@@ -106,9 +106,9 @@ export class MedMeAPIAppointment extends MedMeAPIBasic {
      * Получение записей пользователя.
      * @param params
      */
-    getAppointmentByUser(params: GBookingCoreV2.AppointmentGetAppointmentsByUserRequestParams):
+    getAppointmentByUser (params: GBookingCoreV2.AppointmentGetAppointmentsByUserRequestParams, cred: GBookingCoreV2.Cred):
         Promise<GBookingCoreV2.AppointmentGetAppointmentsByUserResponseResult> {
-        return this.apiRequest_("appointment.get_appointments_by_user", params)
+        return this.apiRequest_("appointment.get_appointments_by_user", params, cred)
             .then((res) => res.result);
     }
 

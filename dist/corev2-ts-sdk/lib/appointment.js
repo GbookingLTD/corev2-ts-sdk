@@ -97,16 +97,16 @@ var MedMeAPIAppointment = /** @class */ (function (_super) {
      * Получение записей клиента.
      * @param params
      */
-    MedMeAPIAppointment.prototype.getAppointmentByClient = function (params) {
-        return this.apiRequest_("appointment.get_appointments_by_client_v2", params)
+    MedMeAPIAppointment.prototype.getAppointmentByClient = function (params, cred) {
+        return this.apiRequest_("appointment.get_appointments_by_client_v2", params, cred)
             .then(function (res) { return res.result; });
     };
     /**
      * Получение записей пользователя.
      * @param params
      */
-    MedMeAPIAppointment.prototype.getAppointmentByUser = function (params) {
-        return this.apiRequest_("appointment.get_appointments_by_user", params)
+    MedMeAPIAppointment.prototype.getAppointmentByUser = function (params, cred) {
+        return this.apiRequest_("appointment.get_appointments_by_user", params, cred)
             .then(function (res) { return res.result; });
     };
     /**

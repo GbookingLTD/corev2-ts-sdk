@@ -36,6 +36,15 @@ export interface IMedMeAPI {
      * @param business
      */
     createBusinessModel(business: GBookingCoreV2.BusinessClass): MedMedAPIBusinessModel;
+    /**
+    * Устанавливает cred.user, cred.token для всех последующих запросов
+    * @param cred
+    */
+    setCredentials?: (cred: GBookingCoreV2.Cred) => void;
+    /**
+     * Удаляет из всех последующих запросов cred
+     */
+    clearCredentials?: () => void;
 }
 export declare let MedMeAPI: IMedMeAPI;
 /**

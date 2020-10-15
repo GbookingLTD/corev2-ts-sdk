@@ -13,7 +13,7 @@ export declare class MedMeAPIClient extends MedMeAPIBasic {
      *
      * @param params
      */
-    findOrCreateClient(params: GBookingCoreV2.ClientFindOrCreateClientRequestParams): Promise<GBookingCoreV2.ClientFindOfCreateClientResponseResult>;
+    findOrCreateClient(params: GBookingCoreV2.ClientFindOrCreateClientRequestParams, cred: GBookingCoreV2.Cred): Promise<GBookingCoreV2.ClientFindOfCreateClientResponseResult>;
     /**
      * method for admin to update client
      * @param params

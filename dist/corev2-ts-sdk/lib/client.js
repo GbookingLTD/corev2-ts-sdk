@@ -32,8 +32,8 @@ var MedMeAPIClient = /** @class */ (function (_super) {
      *
      * @param params
      */
-    MedMeAPIClient.prototype.findOrCreateClient = function (params) {
-        return this.apiRequest_("client.find_or_create_client", params)
+    MedMeAPIClient.prototype.findOrCreateClient = function (params, cred) {
+        return this.apiRequest_("client.find_or_create_client", params, cred)
             .then(function (res) { return res.result; });
     };
     /**

@@ -8,7 +8,7 @@ import {MedMedAPIBusinessModel} from "./businessModel";
 import {IMedMeJsonRpcEnv} from "./jsonRpcEnv";
 import {IJsonRpcRequestContext, jsonRpcRequest, JsonRpcRequestContext} from "./jsonRpcRequest";
 import {APIRequestFn} from "./basic";
-import prodEnv from 'prodJsonRpcEnv';
+import prodEnv from './prodJsonRpcEnv';
 
 /**
  *

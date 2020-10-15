@@ -8,6 +8,7 @@ import {MedMedAPIBusinessModel} from "./businessModel";
 import {IMedMeJsonRpcEnv} from "./jsonRpcEnv";
 import {IJsonRpcRequestContext, jsonRpcRequest, JsonRpcRequestContext} from "./jsonRpcRequest";
 import {APIRequestFn} from "./basic";
+import prodEnv from 'prodJsonRpcEnv';
 
 /**
  *
@@ -50,7 +51,7 @@ export let MedMeAPI: IMedMeAPI;
 /**
  * Initialize MedMeAPI as JsonRpc API
  */
-export function initJsonRpcMedMeAPI(env: IMedMeJsonRpcEnv) {
+export function initJsonRpcMedMeAPI(env: IMedMeJsonRpcEnv = prodEnv) {
     MedMeAPI = new JsonRpcMedMeAPI(env);
 }
 

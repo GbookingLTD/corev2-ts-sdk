@@ -41,7 +41,7 @@ export declare let MedMeAPI: IMedMeAPI;
 /**
  * Initialize MedMeAPI as JsonRpc API
  */
-export declare function initJsonRpcMedMeAPI(env: IMedMeJsonRpcEnv): void;
+export declare function initJsonRpcMedMeAPI(env?: IMedMeJsonRpcEnv): void;
 /**
  *
  */

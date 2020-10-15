@@ -5,11 +5,13 @@ import { MedMeAPIAppointment } from "./appointment";
 import { MedMeAPIOTPAuthorize } from "./otpAuthorize";
 import { MedMedAPIBusinessModel } from "./businessModel";
 import { jsonRpcRequest, JsonRpcRequestContext } from "./jsonRpcRequest";
+import prodEnv from 'prodJsonRpcEnv';
 export var MedMeAPI;
 /**
  * Initialize MedMeAPI as JsonRpc API
  */
 export function initJsonRpcMedMeAPI(env) {
+    if (env === void 0) { env = prodEnv; }
     MedMeAPI = new JsonRpcMedMeAPI(env);
 }
 /**

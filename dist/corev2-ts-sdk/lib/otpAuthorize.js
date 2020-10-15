@@ -1,11 +1,10 @@
 import * as fetch from 'node-fetch';
-import { OAUTH_OTP_SEND, OAUTH_OTP_VERIFY, OAUTH_OTP_WEBLOGIN, OTP_REQUEST_DEBUG } from '../env.prod';
-var debug = OTP_REQUEST_DEBUG;
 /**
  * Методы OTP авторизации.
  */
 var MedMeAPIOTPAuthorize = /** @class */ (function () {
-    function MedMeAPIOTPAuthorize() {
+    function MedMeAPIOTPAuthorize(env) {
+        this.env_ = env;
     }
     /**
      * Отправить OTP код на номер телефона.
@@ -15,13 +14,14 @@ var MedMeAPIOTPAuthorize = /** @class */ (function () {
      * @param phoneNumber
      */
     MedMeAPIOTPAuthorize.prototype.send = function (businessId, phoneCountry, phoneArea, phoneNumber) {
+        var debug = this.env_.OTP_REQUEST_DEBUG;
         var qs = {
             businessID: businessId,
             phone_country: phoneCountry,
             phone_area: phoneArea,
             phone_number: phoneNumber
         };
-        var otpSendUrl = new URL(OAUTH_OTP_SEND);
+        var otpSendUrl = new URL(this.env_.OAUTH_OTP_SEND);
         Object.keys(qs).forEach(function (param) {
             return otpSendUrl.searchParams.append(param, qs[param]);
         });
@@ -47,14 +47,15 @@ var MedMeAPIOTPAuthorize = /** @class */ (function () {
      * @param resetPassword
      */
     MedMeAPIOTPAuthorize.prototype.verify = function (oauthClientId, token, code, resetPassword) {
+        var debug = this.env_.OTP_REQUEST_DEBUG;
         var jsonRequest = {
             client: oauthClientId,
             token: token,
             code: code,
             resetPassword: !!resetPassword
         };
-        debug && console.debug('<-- otp verify', OAUTH_OTP_VERIFY, jsonRequest);
-        return fetch(OAUTH_OTP_VERIFY, {
+        debug && console.debug('<-- otp verify', this.env_.OAUTH_OTP_VERIFY, jsonRequest);
+        return fetch(this.env_.OAUTH_OTP_VERIFY, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -78,12 +79,13 @@ var MedMeAPIOTPAuthorize = /** @class */ (function () {
      * @param password
      */
     MedMeAPIOTPAuthorize.prototype.webLogin = function (phone, password) {
+        var debug = this.env_.OTP_REQUEST_DEBUG;
         var jsonRequest = {
             phone: phone,
             password: password,
         };
-        debug && console.debug('<-- webLogin', OAUTH_OTP_WEBLOGIN, jsonRequest);
-        return fetch(OAUTH_OTP_WEBLOGIN, {
+        debug && console.debug('<-- webLogin', this.env_.OAUTH_OTP_WEBLOGIN, jsonRequest);
+        return fetch(this.env_.OAUTH_OTP_WEBLOGIN, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

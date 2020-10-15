@@ -12,8 +12,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import { Taxonomies } from 'widget-utils/dist';
-import { CRAC_SLOTS_API_ENDPOINT, CRAC_API_ENDPOINT, CRAC3_API_ENDPOINT, } from '../env.prod';
-import { apiRequest } from "./request";
+import { MedMeAPIBasic } from "./basic";
 var InvalidParams = /** @class */ (function (_super) {
     __extends(InvalidParams, _super);
     function InvalidParams(path) {
@@ -42,17 +41,24 @@ var _pickRecursive = function (filter, object, path) {
 /**
  *
  */
-var MedMeAPICracSlots = /** @class */ (function () {
-    function MedMeAPICracSlots() {
+var MedMeAPICracSlots = /** @class */ (function (_super) {
+    __extends(MedMeAPICracSlots, _super);
+    function MedMeAPICracSlots(apiRequest, cracSlotsApiRequest, cracServerRequest, env) {
+        var _this = _super.call(this, apiRequest) || this;
+        _this.cracSlotsAPIRequest_ = cracSlotsApiRequest;
+        _this.cracServerRequest_ = cracServerRequest;
+        _this.env_ = env;
+        return _this;
     }
     /**
      * Возвращает url сервера CRAC по его названию, полученному из данных бизнеса.
+     * @param env: IMedMeJsonRpcEnv
      * @param cracServerName
      */
-    MedMeAPICracSlots.getCracEndpointUrl = function (cracServerName) {
+    MedMeAPICracSlots.getCracEndpointUrl = function (env, cracServerName) {
         var cracUrlMap = {
-            'CRAC': CRAC_API_ENDPOINT,
-            'CRAC3': CRAC3_API_ENDPOINT,
+            'CRAC': env.CRAC_API_ENDPOINT,
+            'CRAC3': env.CRAC3_API_ENDPOINT,
         };
         return cracUrlMap[cracServerName];
     };
@@ -126,7 +132,7 @@ var MedMeAPICracSlots = /** @class */ (function () {
             business: business,
             filters: filters
         };
-        return apiRequest(CRAC_SLOTS_API_ENDPOINT, "CracSlots.GetCRACResourcesAndRooms", params);
+        return this.cracSlotsAPIRequest_("CracSlots.GetCRACResourcesAndRooms", params);
     };
     /**
      *
@@ -138,7 +144,7 @@ var MedMeAPICracSlots = /** @class */ (function () {
             business: business,
             filters: filters
         };
-        return apiRequest(CRAC_SLOTS_API_ENDPOINT, "CracSlots.GetCRACDistributedResourcesAndRooms", params);
+        return this.cracSlotsAPIRequest_("CracSlots.GetCRACDistributedResourcesAndRooms", params);
     };
     /**
      *
@@ -150,7 +156,7 @@ var MedMeAPICracSlots = /** @class */ (function () {
             business: business,
             filters: filters
         };
-        return apiRequest(CRAC_SLOTS_API_ENDPOINT, "CracSlots.GetCRACInsuranceResourcesAndRooms", params);
+        return this.cracSlotsAPIRequest_("CracSlots.GetCRACInsuranceResourcesAndRooms", params);
     };
     /**
      *
@@ -158,8 +164,8 @@ var MedMeAPICracSlots = /** @class */ (function () {
      * @param params
      */
     MedMeAPICracSlots.prototype.getDistributedResourcesFreeByDate = function (serverName, params) {
-        var cracServerEndpoint = MedMeAPICracSlots.getCracEndpointUrl(serverName);
-        return apiRequest(cracServerEndpoint, "Crac.CRACDistributedResourcesFreeByDate", params);
+        var cracServerEndpoint = MedMeAPICracSlots.getCracEndpointUrl(this.env_, serverName);
+        return this.cracServerRequest_(cracServerEndpoint, "Crac.CRACDistributedResourcesFreeByDate", params);
     };
     /**
      *
@@ -167,8 +173,8 @@ var MedMeAPICracSlots = /** @class */ (function () {
      * @param params
      */
     MedMeAPICracSlots.prototype.getResourcesFreeByDate = function (serverName, params) {
-        var cracServerEndpoint = MedMeAPICracSlots.getCracEndpointUrl(serverName);
-        return apiRequest(cracServerEndpoint, "Crac.CRACResourcesFreeByDate", params);
+        var cracServerEndpoint = MedMeAPICracSlots.getCracEndpointUrl(this.env_, serverName);
+        return this.cracServerRequest_(cracServerEndpoint, "Crac.CRACResourcesFreeByDate", params);
     };
     /**
      *
@@ -176,9 +182,9 @@ var MedMeAPICracSlots = /** @class */ (function () {
      * @param params
      */
     MedMeAPICracSlots.prototype.getResourcesFreeByDateV2 = function (serverName, params) {
-        var cracServerEndpoint = MedMeAPICracSlots.getCracEndpointUrl(serverName);
-        return apiRequest(cracServerEndpoint, "Crac.CRACResourcesFreeByDateV2", params);
+        var cracServerEndpoint = MedMeAPICracSlots.getCracEndpointUrl(this.env_, serverName);
+        return this.cracServerRequest_(cracServerEndpoint, "Crac.CRACResourcesFreeByDateV2", params);
     };
     return MedMeAPICracSlots;
-}());
+}(MedMeAPIBasic));
 export { MedMeAPICracSlots };

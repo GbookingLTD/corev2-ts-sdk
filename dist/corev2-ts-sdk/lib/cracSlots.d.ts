@@ -1,13 +1,16 @@
 import * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';
+import { APIRequestFn, CRACServerRequestFn, MedMeAPIBasic } from "./basic";
+import { IMedMeJsonRpcEnv } from "./jsonRpcEnv";
 export declare class InvalidParams extends Error {
     constructor(path: string[]);
 }
 /**
  *
  */
-export declare class MedMeAPICracSlots {
+export declare class MedMeAPICracSlots extends MedMeAPIBasic {
     /**
      * Возвращает url сервера CRAC по его названию, полученному из данных бизнеса.
+     * @param env: IMedMeJsonRpcEnv
      * @param cracServerName
      */
     private static getCracEndpointUrl;
@@ -28,6 +31,10 @@ export declare class MedMeAPICracSlots {
      * @param business
      */
     static convertBusinessToParams(business: GBookingCoreV2.BusinessClass): GBookingCoreV2.CracSlotsRequestBusinessParams;
+    private readonly cracSlotsAPIRequest_;
+    private readonly cracServerRequest_;
+    private readonly env_;
+    constructor(apiRequest: APIRequestFn, cracSlotsApiRequest: APIRequestFn, cracServerRequest: CRACServerRequestFn, env: IMedMeJsonRpcEnv);
     /**
      *
      * @param taxonomy

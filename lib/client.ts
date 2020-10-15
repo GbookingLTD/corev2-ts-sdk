@@ -43,7 +43,7 @@ export class MedMeAPIClient extends MedMeAPIBasic {
      */
     updateClientInfo(params: GBookingCoreV2.ClientUpdateClientInfoRequestParams):
         Promise<boolean> {
-        return apiRequest(CORE_API_ENDPOINT, "client.update_client_info", params)
+        return this.apiRequest_("client.update_client_info", params)
             .then((res) => res.result.success);
     }
 }

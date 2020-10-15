@@ -1,14 +1,29 @@
 import * as fetch from 'node-fetch';
-import { API_REQUEST_DEBUG } from '../env.prod';
 var jsonRpcCounter = 1;
-var debug = API_REQUEST_DEBUG;
-export function apiRequest(endpoint, method, params, cred) {
+/**
+ *
+ */
+var JsonRpcRequestContext = /** @class */ (function () {
+    function JsonRpcRequestContext(env) {
+        this.env = env;
+    }
+    return JsonRpcRequestContext;
+}());
+export { JsonRpcRequestContext };
+/**
+ * @this IJsonRpcRequestContext
+ * @param endpoint
+ * @param method
+ * @param params
+ */
+export function jsonRpcRequest(endpoint, method, params) {
+    var debug = this.env.JSONRPC_REQUEST_DEBUG;
     var req = {
         jsonrpc: "2.0",
         id: jsonRpcCounter++,
         method: method,
         params: params,
-        cred: cred
+        cred: this.cred
     };
     var jsonRequest = JSON.stringify(req);
     debug && console.debug('<--', jsonRequest);

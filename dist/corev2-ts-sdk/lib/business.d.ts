@@ -1,8 +1,9 @@
 import * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';
+import { MedMeAPIBasic } from "./basic";
 /**
  *
  */
-export declare class MedMeAPIBusiness {
+export declare class MedMeAPIBusiness extends MedMeAPIBasic {
     /**
      * Получение данных бизнеса.
      * @param params

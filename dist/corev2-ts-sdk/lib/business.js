@@ -1,17 +1,31 @@
-import { CORE_API_ENDPOINT } from '../env.prod';
-import { apiRequest } from "./request";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+import { MedMeAPIBasic } from "./basic";
 /**
  *
  */
-var MedMeAPIBusiness = /** @class */ (function () {
+var MedMeAPIBusiness = /** @class */ (function (_super) {
+    __extends(MedMeAPIBusiness, _super);
     function MedMeAPIBusiness() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
      * Получение данных бизнеса.
      * @param params
      */
     MedMeAPIBusiness.prototype.getProfileById = function (params) {
-        return apiRequest(CORE_API_ENDPOINT, "business.get_profile_by_id", params);
+        return this.apiRequest_("business.get_profile_by_id", params);
     };
     /**
      * Получение модели бизнеса по ее идентификатору.
@@ -35,7 +49,7 @@ var MedMeAPIBusiness = /** @class */ (function () {
      * @param params
      */
     MedMeAPIBusiness.prototype.getNetworkData = function (params) {
-        return apiRequest(CORE_API_ENDPOINT, "business.get_network_data", params);
+        return this.apiRequest_("business.get_network_data", params);
     };
     /**
      *
@@ -68,5 +82,5 @@ var MedMeAPIBusiness = /** @class */ (function () {
         });
     };
     return MedMeAPIBusiness;
-}());
+}(MedMeAPIBasic));
 export { MedMeAPIBusiness };

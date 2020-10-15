@@ -1,8 +1,9 @@
 import * as GBookingCoreV2 from 'corev2-schemata/langs/typescript/GBookingCoreV2';
+import { MedMeAPIBasic } from "./basic";
 /**
  * Методы для создания и/или получения клиента, редактирования данных клиента.
  */
-export declare class MedMeAPIClient {
+export declare class MedMeAPIClient extends MedMeAPIBasic {
     /**
      *
      * @param params
@@ -12,7 +13,7 @@ export declare class MedMeAPIClient {
      *
      * @param params
      */
-    findOrCreateClient(params: GBookingCoreV2.ClientFindOrCreateClientRequestParams, cred: GBookingCoreV2.Cred): Promise<GBookingCoreV2.ClientFindOfCreateClientResponseResult>;
+    findOrCreateClient(params: GBookingCoreV2.ClientFindOrCreateClientRequestParams): Promise<GBookingCoreV2.ClientFindOfCreateClientResponseResult>;
     /**
      * method for admin to update client
      * @param params

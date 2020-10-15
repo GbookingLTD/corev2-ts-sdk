@@ -12,7 +12,6 @@ export var MedMeAPI;
  */
 export function initJsonRpcMedMeAPI(env) {
     if (env === void 0) { env = prodEnv; }
-    console.error(JSON.stringify(env));
     MedMeAPI = new JsonRpcMedMeAPI(env);
 }
 /**

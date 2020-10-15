@@ -63,7 +63,6 @@ export let MedMeAPI: IMedMeAPI;
  * Initialize MedMeAPI as JsonRpc API
  */
 export function initJsonRpcMedMeAPI(env: IMedMeJsonRpcEnv = prodEnv) {
-    console.error(JSON.stringify(env));
     MedMeAPI = new JsonRpcMedMeAPI(env);
 }
 

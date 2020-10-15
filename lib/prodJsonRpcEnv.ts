@@ -10,8 +10,8 @@ const prodEnv: IMedMeJsonRpcEnv = {
     OAUTH_OTP_VERIFY: "https://oauthv2.gbooking.ru/sms/verify",
     OAUTH_OTP_WEBLOGIN: "https://oauthv2.gbooking.ru/web_login",
 
-    JSONRPC_REQUEST_DEBUG: true,
-    OTP_REQUEST_DEBUG: true
+    JSONRPC_REQUEST_DEBUG: false,
+    OTP_REQUEST_DEBUG: false
 };
 
 export default prodEnv;

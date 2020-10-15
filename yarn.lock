@@ -769,7 +769,7 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
 
 "corev2-schemata@https://github.com/GbookingLTD/corev2-schemata.git#develop":
   version "2.0.4"
-  resolved "https://github.com/GbookingLTD/corev2-schemata.git#a3b795f456a1dcf182c8522f72a3473a2b27b6dc"
+  resolved "https://github.com/GbookingLTD/corev2-schemata.git#c1d1ca5842a61689aeaab483477bd8005ca310b0"
   dependencies:
     "@adobe/jsonschema2md" "^3.3.1"
     ajv "^6.5.3"

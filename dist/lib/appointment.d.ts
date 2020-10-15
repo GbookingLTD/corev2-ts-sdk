@@ -12,7 +12,7 @@ export declare class MedMeAPIAppointment {
      * Подтверждение записи клиентом
      * @param params
      */
-    clientConfirmAppointment(params: GBookingCoreV2.ConfirmAppointment): Promise<GBookingCoreV2.Appointment>;
+    clientConfirmAppointment(params: GBookingCoreV2.ConfirmAppointmentParams): Promise<GBookingCoreV2.Appointment>;
     /**
      * Подтверждение записи администратором бизнеса
      * @see clientConfirmAppointment
@@ -24,7 +24,7 @@ export declare class MedMeAPIAppointment {
      * Отмена записи клиентом
      * @param params
      */
-    cancelAppointmentByClient(params: GBookingCoreV2.AppointmentCancelAppointmentByClientRequestParams): Promise<boolean>;
+    cancelAppointmentByClient(params: GBookingCoreV2.CancelAppointmentByClientParams): Promise<boolean>;
     /**
      * Отмена записи администратором бизнеса
      * @param params

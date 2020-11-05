@@ -141,4 +141,14 @@ export class MedMeAPIAppointment extends MedMeAPIBasic {
         return this.apiRequest_("appointment.finish_appointment", params)
             .then((res) => res.result)
     }
+
+    /**
+     *
+     * @param params
+     */
+    openAppointment(params: GBookingCoreV2.OpenAppointment):
+        Promise<boolean> {
+        return this.apiRequest_("appointment.open_appointment", params)
+            .then((res) => res.result)
+    }
 }

@@ -1,6 +1,6 @@
 {
   "name": "corev2-ts-sdk",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "",
   "main": "dist/corev2-ts-sdk/lib/api.js",
   "types": "dist/corev2-ts-sdk/lib/api.d.ts",
@@ -16,12 +16,12 @@
     "moment-range": "^4.0.2",
     "moment-timezone": "^0.5.31",
     "node-fetch": "^2.6.0",
-    "widget-utils": "git+https://github.com/GbookingLTD/widget-utils.git#0.8.68"
+    "widget-utils": "git+https://github.com/GbookingLTD/widget-utils.git#0.8.70"
   },
   "devDependencies": {
     "typescript": "^3.9.5"
   },
   "volta": {
-    "node": "8.11.2"
+    "node": "14.15.1"
   }
 }

@@ -47,12 +47,15 @@ export class MedMeAPIBusiness extends MedMeAPIBasic {
      * @param takeBusinessInfo
      * @param source
      */
-    public getNetworkBusinessList(networkId: number, takeBusinessInfo: boolean = true, source: string = 'GENERAL'):
+    public getNetworkBusinessList(networkId: number, takeBusinessInfo: boolean = true, source: string = 'GENERAL', contractExtraId?: string):
         Promise<GBookingCoreV2.BusinessRefInNetwork[]> {
         let params: GBookingCoreV2.BusinessGetNetworkDataRequestParams = {
             networkID: networkId,
             with_business_info: takeBusinessInfo
         };
+        if (contractExtraId) {
+          params.contract = { extraId: contractExtraId };
+        }
 
         return this.getNetworkData(params)
             .then((res: GBookingCoreV2.BusinessGetNetworkDataResponse) => {

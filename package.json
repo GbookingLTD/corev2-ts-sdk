@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/node": "^14.0.13",
-    "corev2-schemata": "git+https://github.com/GbookingLTD/corev2-schemata.git#2.0.7",
+    "corev2-schemata": "git+https://github.com/GbookingLTD/corev2-schemata.git#2.0.8",
     "moment-range": "^4.0.2",
     "moment-timezone": "^0.5.31",
     "node-fetch": "^2.6.0",

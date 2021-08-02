@@ -767,9 +767,9 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
-"corev2-schemata@git+https://github.com/GbookingLTD/corev2-schemata.git#2.0.10":
+"corev2-schemata@git+https://github.com/GbookingLTD/corev2-schemata.git#2.0.11":
   version "2.0.7"
-  resolved "git+https://github.com/GbookingLTD/corev2-schemata.git#56eac06b5cb79c190752c930b7b1f48d158637ba"
+  resolved "git+https://github.com/GbookingLTD/corev2-schemata.git#8a27417135d018b0dbe9224e28eddf10e6a6c2c7"
   dependencies:
     "@adobe/jsonschema2md" "^3.3.1"
     ajv "^6.5.3"

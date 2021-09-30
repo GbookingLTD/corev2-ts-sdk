@@ -1,4 +1,4 @@
 tsc=tsc
 
 build:
-	$(tsc) --declaration lib/api.ts
+	$(tsc) --declaration --outDir dist lib/api.ts

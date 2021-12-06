@@ -71,4 +71,9 @@ export declare class MedMeAPIAppointment extends MedMeAPIBasic {
      * @param params
      */
     finishAppointment(params: GBookingCoreV2.FinishAppointmentParams): Promise<boolean>;
+    /**
+     *
+     * @param params
+     */
+    openAppointment(params: GBookingCoreV2.OpenAppointment): Promise<boolean>;
 }

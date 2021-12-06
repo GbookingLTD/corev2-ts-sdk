@@ -1751,7 +1751,7 @@ export interface BusinessGetNetworkDataRequestParams {
      */
     networkID: BackofficeIdUnion;
     resource?: ResourceObject;
-    taxonomy?: TaxonomyObject;
+    taxonomy?: ParamsTaxonomyObject;
     /**
      * Если передано true - возвращает информацию business_info/general_info по каждому бизнесу
      * в массиве businesses
@@ -1773,7 +1773,7 @@ export interface ResourceObject {
      */
     id?: string;
 }
-export interface TaxonomyObject {
+export interface ParamsTaxonomyObject {
     /**
      * идентификатор услуги, если передано - возвращает все бизнесы нетворка с такой услугой
      */
@@ -1915,6 +1915,7 @@ export interface InfoBackofficeConfiguration {
     blockNotificationForAnyAvailableAdjacentService?: boolean;
     cabinetsEnabled?: boolean;
     checkClientOverlapping?: boolean;
+    clientCancellationRestriction?: PurpleClientCancellationRestriction;
     customOnlinePaymentConfirmationTemplate?: string;
     defaultGTScheduleDayView?: boolean;
     disableAppointmentClientInlineEditor?: boolean;
@@ -2026,6 +2027,10 @@ export interface InfoBackofficeConfiguration {
     workWeekEnd?: number;
     workWeekStart?: number;
 }
+export interface PurpleClientCancellationRestriction {
+    active?: boolean;
+    disableInHours?: number;
+}
 export declare enum FeedBackMinRating {
     The1 = "1",
     The2 = "2",
@@ -2071,10 +2076,15 @@ export declare enum BackofficeType {
     Mu = "MU"
 }
 export interface InfoBackofficeConfigurationObject {
+    clientCancellationRestriction?: FluffyClientCancellationRestriction;
     enableExtendedPhone?: boolean;
     enableMasterImportance?: boolean;
     enablePhoneNationalMode?: boolean;
     resourceTimetableType?: ResourceTimetableType;
+}
+export interface FluffyClientCancellationRestriction {
+    active?: boolean;
+    disableInHours?: number;
 }
 export interface InfoCabinet {
     active?: boolean;
@@ -3185,6 +3195,10 @@ export interface IntegrationDataObject {
 }
 export interface Ehr {
     active?: boolean;
+    host?: string;
+    path?: string;
+    port?: string;
+    protocol?: string;
 }
 export interface NetworkClientBlockingSettings {
     appointmentClientBlock?: boolean;
@@ -3246,7 +3260,7 @@ export interface BusinessGetProfileByIdRequestParams {
      * данные по договору, если указано то список работников и услуг формируется на основе
      * переданного договора
      */
-    contract?: ContractClass;
+    contract?: IndigoContract;
     /**
      * если указано true - меняет формат представления discounts
      */
@@ -3321,7 +3335,7 @@ export interface FriskyBusiness {
  * данные по договору, если указано то список работников и услуг формируется на основе
  * переданного договора
  */
-export interface ContractClass {
+export interface IndigoContract {
     extraId?: string;
     id?: string;
 }
@@ -3440,6 +3454,7 @@ export interface BusinessBackofficeConfiguration {
     blockNotificationForAnyAvailableAdjacentService?: boolean;
     cabinetsEnabled?: boolean;
     checkClientOverlapping?: boolean;
+    clientCancellationRestriction?: TentacledClientCancellationRestriction;
     customOnlinePaymentConfirmationTemplate?: string;
     defaultGTScheduleDayView?: boolean;
     disableAppointmentClientInlineEditor?: boolean;
@@ -3554,6 +3569,10 @@ export interface BusinessBackofficeConfiguration {
     workWeekEnd?: number;
     workWeekStart?: number;
 }
+export interface TentacledClientCancellationRestriction {
+    active?: boolean;
+    disableInHours?: number;
+}
 export interface ScheduleSplitDayTimeInterval {
     _id?: string;
     endHour?: number;
@@ -3570,10 +3589,15 @@ export interface FluffyTelemedApplication {
     urlAppSchema?: string;
 }
 export interface BusinessBackofficeConfigurationObject {
+    clientCancellationRestriction?: StickyClientCancellationRestriction;
     enableExtendedPhone?: boolean;
     enableMasterImportance?: boolean;
     enablePhoneNationalMode?: boolean;
     resourceTimetableType?: ResourceTimetableType;
+}
+export interface StickyClientCancellationRestriction {
+    active?: boolean;
+    disableInHours?: number;
 }
 export interface BusinessCabinet {
     active?: boolean;
@@ -4045,6 +4069,7 @@ export interface ClientClass {
     clientCardCreationDate?: string;
     clientCardNumber?: string;
     clientContractNumber?: string;
+    contractAttachments?: ContractAttachment[];
     created?: string;
     creatorProfileID?: null | string;
     creatorProfileName?: null | string;
@@ -4105,6 +4130,28 @@ export interface ChildrenClient {
     middleName?: string;
     name?: string;
     surname?: string;
+}
+export interface ContractAttachment {
+    active?: boolean;
+    attachmentExtraID?: string;
+    attachmentID?: string;
+    attachmentName?: string;
+    attachmentNumber?: string;
+    businessID?: string;
+    contractExtraID?: string;
+    contractID?: string;
+    contractName?: string;
+    contractNumber?: string;
+    contractOwnerName?: string;
+    dateBegin?: string;
+    dateEnd?: string;
+    networkID?: string;
+    provider?: string;
+    taxonomies?: TaxonomyElement[];
+}
+export interface TaxonomyElement {
+    count?: number;
+    taxonomyID?: string;
 }
 export interface ClientExtraField {
     fieldID: string;
@@ -4265,6 +4312,10 @@ export interface ClientFindOrCreateClientRequest {
 export interface ClientFindOrCreateClientRequestParams {
     business: Business1;
     client?: ClientClass;
+    /**
+     * данные о договоре
+     */
+    contract?: IndecentContract;
     network?: StickyNetwork;
     skipEmailCheck?: boolean;
     skipProfileUpdate?: boolean;
@@ -4274,6 +4325,13 @@ export interface Business1 {
      * идентификатор бизнеса
      */
     id: BackofficeIdUnion;
+}
+/**
+ * данные о договоре
+ */
+export interface IndecentContract {
+    contractExtraId?: string;
+    contractID?: string;
 }
 export interface StickyNetwork {
     /**

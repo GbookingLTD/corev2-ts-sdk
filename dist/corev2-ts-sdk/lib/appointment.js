@@ -133,6 +133,14 @@ var MedMeAPIAppointment = /** @class */ (function (_super) {
         return this.apiRequest_("appointment.finish_appointment", params)
             .then(function (res) { return res.result; });
     };
+    /**
+     *
+     * @param params
+     */
+    MedMeAPIAppointment.prototype.openAppointment = function (params) {
+        return this.apiRequest_("appointment.open_appointment", params)
+            .then(function (res) { return res.result; });
+    };
     return MedMeAPIAppointment;
 }(MedMeAPIBasic));
 export { MedMeAPIAppointment };

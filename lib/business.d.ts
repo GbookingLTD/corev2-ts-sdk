@@ -27,5 +27,5 @@ export declare class MedMeAPIBusiness extends MedMeAPIBasic {
      * @param takeBusinessInfo
      * @param source
      */
-    getNetworkBusinessList(networkId: number, takeBusinessInfo?: boolean, source?: string): Promise<GBookingCoreV2.BusinessRefInNetwork[]>;
+    getNetworkBusinessList(networkId: number, takeBusinessInfo?: boolean, source?: string, contractExtraId?: string): Promise<GBookingCoreV2.BusinessRefInNetwork[]>;
 }
